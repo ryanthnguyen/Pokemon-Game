@@ -18,13 +18,20 @@ public class CuteCreature
         experienceValue = expValue;
         experiencePoints = 0;
         isSpecial = special;
-        System.out.println("Name: " + species);
-        System.out.println("Level: " + level);
-        System.out.println("Max Hit Point: " + currentHitPoints);
-        System.out.println("Attack Damage: " + attackDamage);
-        System.out.println("Experience Value: " + experienceValue);
-        System.out.println("Experience Points: " + experiencePoints);
-        System.out.println("Special: " + isSpecial);
+        System.out.println("Level " + level + " " +  species);
+        System.out.println("--------------");
+        if (isSpecial == true)
+        {
+            System.out.println("*** Special! ***");
+        }
+        else
+        {
+            System.out.println("*** Normal ***");
+        }
+        System.out.println("HP: " + currentHitPoints + "/" + currentHitPoints);
+        System.out.println("Attack Dmg: " + attackDamage);
+        System.out.println("XP: " + experiencePoints + "/" + 250);
+        System.out.println("XP Value: " + experienceValue);
     }
     public String getSpecies()
     {
@@ -52,14 +59,38 @@ public class CuteCreature
     }
     public void takeDamge(int dmg)
     {
-        if (dmg > currentHitPoints)
+        currentHitPoints = (int)(currentHitPoints - dmg);
+        System.out.print("Damage Received: " + currentHitPoints);
+        if (currentHitPoints < 0)
         {
-            currentHitPoints = (int)(dmg - currentHitPoints);
-            if (currentHitPoints < 0 )
-            {
-                currentHitPoints = 0;
-                System.out.println("Your character is incapitated!" );
-            }
+            currentHitPoints = 0;
+            System.out.println("HP: " + currentHitPoints + "Your character is incapitated! ");
         }
     }
-} 
+    private void levelUp()
+    {
+        experienceValue +=10;
+        if (level >= 2 && level <= 10)
+        {
+            currentHitPoints +=4;
+            attackDamage +=3;
+            System.out.println("Your character leveled up!");
+        }
+        else if (level >= 11)
+        {
+            currentHitPoints +=1;
+            attackDamage +=1;
+            System.out.println("Your character leveled up!");
+        }
+    }
+    public void gainExp(int exp)
+    {
+        experiencePoints = 250;
+        if (exp > experiencePoints)
+        {
+            level +=1;
+            this.levelUp();
+            experiencePoints = (int)(experiencePoints + 50);
+        }
+    }
+}
