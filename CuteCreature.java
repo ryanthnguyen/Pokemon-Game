@@ -29,7 +29,7 @@ public class CuteCreature
     }
     public String getSpecies()
     {
-        return this.species;
+        return species;
     }
     public int getCurrentLevel()
     {
@@ -51,24 +51,24 @@ public class CuteCreature
     {
         return isSpecial;
     }
-    public void takeDamge(int dmg)
+    public void takeDamage(int dmg)
     {
-        currentHitPoints = (int)(currentHitPoints - dmg);
-        System.out.print("Damage Received: " + currentHitPoints);
-        if (currentHitPoints < 0)
+        if (this.currentHitPoints > 0)
         {
-            currentHitPoints = 0;
-            System.out.println("HP: " + currentHitPoints + "Your character is incapitated! ");
+            this.currentHitPoints -= dmg;
+            System.out.println(this.getSpecies() + " received "  + dmg);
         }
     }
     private void levelUp()
     {
         level++;
+        experienceValue += 10;
         if (level >= 2 && level <= 10)
         {
             currentHitPoints +=4;
             attackDamage +=3;
             System.out.println("\n" + "Your character leveled up to " + level);
+            
         }
         else if (level >= 11)
         {
@@ -76,6 +76,7 @@ public class CuteCreature
             attackDamage +=1;
             System.out.println("\n" + "Your character leveled up to " + level);
         }
+         System.out.println("\n" + this.getSpecies() + " gained " + experiencePoints);
     }
     public void gainExp(int exp)
     {
@@ -87,39 +88,37 @@ public class CuteCreature
             count+=50;
             accumulatedExperiencePoints += count;
         }
-        System.out.println("\n" + "You gained " + experiencePoints);
     }
     public void attack(CuteCreature c)
     {
-        double chanceOfAttack = (100 * Math.random() + 1);
-        double basicDamage = attackDamage * .08;
-        double critDamage = 2 * (attackDamage * .08);
-        if (currentHitPoints > 0)
-        {
-        if (chanceOfAttack > 80.0)
-        {
-            this.currentHitPoints -= basicDamage;
-            System.out.println("Hit For " + basicDamage);
+        //need to fix so how that basic attack is +- 20%;
+        double chanceOfAttack = (Math.random() * 100) + 1;
+        double maxAttack = 1.2 * attackDamage;
+        double minAttack = .8 * attackDamage;
+        double basicDamage = (Math.random() * (maxAttack - minAttack + 1)) + minAttack;
+        double critDamage = 2 * basicDamage;
+        if (chanceOfAttack  <= 80)
+         {
+          System.out.println("\n" + this.getSpecies() + " hit For " + (int)basicDamage);
+          c.takeDamage((int)basicDamage);
         }
-        else if (chanceOfAttack <= 15.0)
+        else if (chanceOfAttack <= 15)
         {
-            System.out.println("You Missed!");
+            System.out.println("\n" + this.getSpecies() + " Missed!");
         }
-        else if (chanceOfAttack <= 5.0)
+        else if (chanceOfAttack <= 5)
         {
-            this.currentHitPoints -= critDamage;
-            System.out.println("Critical Hit For! " + critDamage);
+            System.out.println("/n" + this.getSpecies() + " Critical Hit For! " + (int)critDamage);
+            c.takeDamage((int)critDamage);
         }
-       }
-       else 
-       {
-        if (this.currentHitPoints < 0)
+        if (c.getHitPoints() <= 0)
         {
-        this.currentHitPoints = 0;
-        System.out.println(c + " has been decapitated!");
-       }
-    }
-    }
+            c.currentHitPoints = 0;
+            gainExp(c.getExpValue());
+            System.out.println("\n" + c.getSpecies() + " has been incapitated");
+            System.out.println("HP " + 0 + " " + c.getSpecies() + " is incapitated! ");
+        }
+        }
     public String toString()
     {
          if (isSpecial == true)

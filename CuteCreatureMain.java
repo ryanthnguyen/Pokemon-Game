@@ -3,7 +3,7 @@
 import java.util.*;
 public class CuteCreatureMain
 {
-     public static void main(String[] args)
+    public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
         System.out.println("Please creature your special creature" );
@@ -18,7 +18,7 @@ public class CuteCreatureMain
         System.out.println("Enter true for special and false for not special: ");
         boolean special = input.nextBoolean();
         CuteCreature createCharacter = new CuteCreature(name, hitPoint, damage, expValue, special);
-        CuteCreature createEnemyCharacter = new CuteCreature("Emilia", 60, 50, 70, special);
+        CuteCreature createEnemyCharacter = new CuteCreature("Emilia", 150, 100, 260, special);
         createCharacter.getSpecies();
         createCharacter.getCurrentLevel();
         createCharacter.getAttackDmg();
@@ -26,11 +26,22 @@ public class CuteCreatureMain
         createCharacter.getExpPoints();
         createCharacter.getSpecial();
         System.out.println(createCharacter);
-        createCharacter.gainExp(450);
-        System.out.println(createCharacter);
-        while(createCharacter.getHitPoints() > 0)
+        System.out.println(createEnemyCharacter);
+        while (createCharacter.getHitPoints() != 0)
         {
            createCharacter.attack(createEnemyCharacter);
+           if (createEnemyCharacter.getHitPoints() > 0)
+           {
+               createEnemyCharacter.attack(createCharacter);
+           }
+           else 
+           {
+               createCharacter.gainExp(createEnemyCharacter.getExpValue());
+               System.out.println(createCharacter);
+               break;
+           }
         }
+        System.out.println(createEnemyCharacter);
+        System.out.println(createCharacter);
     }
 }
