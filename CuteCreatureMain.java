@@ -15,10 +15,10 @@ public class CuteCreatureMain
         int damage = input.nextInt();
         System.out.print("Please enter beginning exp value: " );
         int expValue = input.nextInt();
-        System.out.println("Enter true for special and false for not special: ");
+        System.out.print("Enter true for special and false for not special: ");
         boolean special = input.nextBoolean();
         CuteCreature createCharacter = new CuteCreature(name, hitPoint, damage, expValue, special);
-        CuteCreature createEnemyCharacter = new CuteCreature("Emilia", 150, 100, 260, special);
+        CuteCreature createEnemyCharacter = new CuteCreature("Emilia", 150, 100, 1000, special);
         createCharacter.getSpecies();
         createCharacter.getCurrentLevel();
         createCharacter.getAttackDmg();
@@ -27,19 +27,10 @@ public class CuteCreatureMain
         createCharacter.getSpecial();
         System.out.println(createCharacter);
         System.out.println(createEnemyCharacter);
-        while (createCharacter.getHitPoints() != 0)
+        while (createCharacter.getHitPoints() > 0 && createEnemyCharacter.getHitPoints() > 0)
         {
-           createCharacter.attack(createEnemyCharacter);
-           if (createEnemyCharacter.getHitPoints() > 0)
-           {
-               createEnemyCharacter.attack(createCharacter);
-           }
-           else 
-           {
-               createCharacter.gainExp(createEnemyCharacter.getExpValue());
-               System.out.println(createCharacter);
-               break;
-           }
+           createCharacter.attack(createEnemyCharacter);           
+           createEnemyCharacter.attack(createCharacter);
         }
         System.out.println(createEnemyCharacter);
         System.out.println(createCharacter);

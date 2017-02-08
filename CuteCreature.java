@@ -81,7 +81,7 @@ public class CuteCreature
     public void gainExp(int exp)
     {
         experiencePoints += exp;
-        for (int i  = experiencePoints; i > count;)
+        for (int i  = experiencePoints; i > accumulatedExperiencePoints;)
         {
             experiencePoints = exp;
             this.levelUp();
@@ -111,14 +111,14 @@ public class CuteCreature
             System.out.println("/n" + this.getSpecies() + " Critical Hit For! " + (int)critDamage);
             c.takeDamage((int)critDamage);
         }
-        if (c.getHitPoints() <= 0)
+         if (c.getHitPoints() <= 0)
         {
             c.currentHitPoints = 0;
             gainExp(c.getExpValue());
             System.out.println("\n" + c.getSpecies() + " has been incapitated");
             System.out.println("HP " + 0 + " " + c.getSpecies() + " is incapitated! ");
         }
-        }
+    }
     public String toString()
     {
          if (isSpecial == true)
