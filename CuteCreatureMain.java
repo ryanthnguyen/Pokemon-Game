@@ -4,7 +4,7 @@ import java.util.*;
 public class CuteCreatureMain
 {
      public static void main(String[] args)
-    {
+     {
         Scanner input = new Scanner(System.in);
         System.out.println("Please creature your special creature" );
         System.out.print("Please pick a name for your creature: ");

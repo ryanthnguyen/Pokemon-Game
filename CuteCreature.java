@@ -3,15 +3,15 @@
 import java.util.*;
 public class CuteCreature
 {
-    private String species;
-    private int level;
-    private int currentHitPoints;
-    private int attackDamage;
-    private int experiencePoints;
-    private int accumulatedExperiencePoints = 250;
-    private int experienceValue;
-    private int count = 250;
-    private boolean isSpecial = true;
+    protected String species;
+    protected int level;
+    protected int currentHitPoints;
+    protected int attackDamage;
+    protected int experiencePoints;
+    protected int accumulatedExperiencePoints = 250;
+    protected int experienceValue;
+    protected int count = 250;
+    protected boolean isSpecial = true;
     public CuteCreature(String monster, int maxHitPoint, int attackDmg, int expValue, boolean special)
     {
         species = monster;
@@ -60,6 +60,28 @@ public class CuteCreature
             currentHitPoints = 0;
             System.out.println("HP: " + currentHitPoints + "Your character is incapitated! ");
         }
+    }
+    public String attribute(String species)
+    {
+        uppercaseSpecies = species.UpperCase();
+        String attribute = "";
+        if (species().charAt(0) >= 'A' && species().charAt(0) <= 'G')
+        {
+            attribute = "fire";
+        }
+        else if (species().charAt(0) >= 'H' && species().charAt(0) <= 'M')
+        {
+            attribute = "water";
+        }
+        else if(species(0).charAt(0) >= 'N' && species(0).charAt(0) <= 'N')
+        {
+            attribute = "air";
+        }
+        else if (species(0).charAt(0) >= 'T' && species(0).charAt(0) <= 'Z')
+        {
+            attribute = "earth";
+        }
+        return attribute;
     }
     private void levelUp()
     {
