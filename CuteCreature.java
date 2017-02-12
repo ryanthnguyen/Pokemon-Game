@@ -61,28 +61,6 @@ public class CuteCreature
             System.out.println("HP: " + currentHitPoints + "Your character is incapitated! ");
         }
     }
-    public String attribute(String species)
-    {
-        uppercaseSpecies = species.UpperCase();
-        String attribute = "";
-        if (species().charAt(0) >= 'A' && species().charAt(0) <= 'G')
-        {
-            attribute = "fire";
-        }
-        else if (species().charAt(0) >= 'H' && species().charAt(0) <= 'M')
-        {
-            attribute = "water";
-        }
-        else if(species(0).charAt(0) >= 'N' && species(0).charAt(0) <= 'N')
-        {
-            attribute = "air";
-        }
-        else if (species(0).charAt(0) >= 'T' && species(0).charAt(0) <= 'Z')
-        {
-            attribute = "earth";
-        }
-        return attribute;
-    }
     private void levelUp()
     {
         level++;
