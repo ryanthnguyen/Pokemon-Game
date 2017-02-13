@@ -29,7 +29,7 @@ public class CuteCreature
     }
     public String getSpecies()
     {
-        return this.species;
+        return species;
     }
     public int getCurrentLevel()
     {
@@ -51,74 +51,77 @@ public class CuteCreature
     {
         return isSpecial;
     }
-    public void takeDamge(int dmg)
+    public void takeDamage(int dmg)
     {
-        currentHitPoints = (int)(currentHitPoints - dmg);
-        System.out.print("Damage Received: " + currentHitPoints);
-        if (currentHitPoints < 0)
+      if (this.currentHitPoints > 0)
         {
-            currentHitPoints = 0;
-            System.out.println("HP: " + currentHitPoints + "Your character is incapitated! ");
+            this.currentHitPoints -= dmg;
         }
-    }
-    private void levelUp()
+      System.out.print(getSpecies() + " received "  + dmg);
+      if (currentHitPoints == 0)
+       {
+         System.out.println(getSpecies() + " has been incapitated");
+         System.out.println("HP " + 0 + " " + getSpecies() + " is incapitated! ");   
+       }
+       else
+       {
+           System.out.println("\n");
+       }
+    } 
+    protected void levelUp()
     {
         level++;
+        experienceValue += 10;
         if (level >= 2 && level <= 10)
         {
             currentHitPoints +=4;
             attackDamage +=3;
-            System.out.println("\n" + "Your character leveled up to " + level);
         }
         else if (level >= 11)
         {
             currentHitPoints +=1;
             attackDamage +=1;
-            System.out.println("\n" + "Your character leveled up to " + level);
         }
     }
     public void gainExp(int exp)
     {
         experiencePoints += exp;
-        for (int i  = experiencePoints; i > count;)
+        for (int i  = experiencePoints; i > accumulatedExperiencePoints;)
         {
             experiencePoints = exp;
             this.levelUp();
             count+=50;
             accumulatedExperiencePoints += count;
         }
-        System.out.println("\n" + "You gained " + experiencePoints);
+        System.out.println("\n" + "Your character leveled up to " + level);
+        System.out.println(this.getSpecies() + " gained " + experiencePoints);
     }
     public void attack(CuteCreature c)
     {
-        double chanceOfAttack = (100 * Math.random() + 1);
-        double basicDamage = attackDamage * .08;
-        double critDamage = 2 * (attackDamage * .08);
-        if (currentHitPoints > 0)
-        {
-        if (chanceOfAttack > 80.0)
-        {
-            this.currentHitPoints -= basicDamage;
-            System.out.println("Hit For " + basicDamage);
+        //need to fix so how that basic attack is +- 20%;
+        double chanceOfAttack = Math.random();
+        double maxAttack = 1.2 * attackDamage;
+        double minAttack = .8 * attackDamage;
+        double basicDamage = (Math.random() * (maxAttack - minAttack + 1)) + minAttack;
+        double critDamage = 2 * basicDamage;
+        if (chanceOfAttack  <= .80)
+         {
+          System.out.println(getSpecies() + " hit " + c.getSpecies() + " For " + (int)basicDamage);
+          c.takeDamage((int)basicDamage);
         }
-        else if (chanceOfAttack <= 15.0)
+        else if (chanceOfAttack >= .80 && chanceOfAttack <= .85 )
         {
-            System.out.println("You Missed!");
+            System.out.println(c.getSpecies() + " took a critical hit " + (int)critDamage);
+            c.takeDamage((int)critDamage);
         }
-        else if (chanceOfAttack <= 5.0)
+        else 
+       
+              System.out.println(getSpecies() + " Missed!");
+         if (c.getHitPoints() <= 0)
         {
-            this.currentHitPoints -= critDamage;
-            System.out.println("Critical Hit For! " + critDamage);
+            c.currentHitPoints = 0;
+            gainExp(c.getExpValue());
         }
-       }
-       else 
-       {
-        if (this.currentHitPoints < 0)
-        {
-        this.currentHitPoints = 0;
-        System.out.println(c + " has been decapitated!");
-       }
-    }
     }
     public String toString()
     {
