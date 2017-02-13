@@ -21,8 +21,8 @@ public class CuteCreatureMain
         EvolvableCuteCreature createEnemyCharacter = new EvolvableCuteCreature("Rem",800, 100, 1500, special);
         System.out.println(createCharacter);
         System.out.println(createEnemyCharacter);
-        createCharacter.gainExp(1000);
-        createEnemyCharacter.gainExp(1000);
+        createCharacter.gainExp(16000);
+        createEnemyCharacter.gainExp(16000);
         while (createCharacter.getHitPoints() > 0 && createEnemyCharacter.getHitPoints() > 0)
         {
            createCharacter.attack(createEnemyCharacter);

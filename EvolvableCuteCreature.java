@@ -67,6 +67,12 @@ public class EvolvableCuteCreature extends CuteCreature
                     System.out.println("Elemental Attack: " + elementalAttack);
                     c.takeDamage(elementalAttack);
                    }
+                   else if (c.getAttribute() == "fire")
+                   {
+                       elementalAttack = 0;
+                       System.out.println("Elemental Attack: " + elementalAttack);
+                       c.takeDamage(elementalAttack);
+                   }
                    else if (c.getAttribute() == "water")
                    {
                        elementalAttack = (int)(0.25 * attackDamage);
@@ -92,6 +98,12 @@ public class EvolvableCuteCreature extends CuteCreature
                     elementalAttack = attackDamage;
                     System.out.println("Elemental Attack: " + elementalAttack);
                     c.takeDamage(elementalAttack);
+                   }
+                    else if (c.getAttribute() == "water")
+                   {
+                       elementalAttack = 0;
+                       System.out.println("Elemental Attack: " + elementalAttack);
+                       c.takeDamage(elementalAttack);
                    }
                    else if (c.getAttribute() == "earth")
                    {
@@ -119,6 +131,12 @@ public class EvolvableCuteCreature extends CuteCreature
                     System.out.println("Elemental Attack: " + elementalAttack);
                     c.takeDamage(elementalAttack);
                    }
+                    else if (c.getAttribute() == "air")
+                   {
+                       elementalAttack = 0;
+                       System.out.println("Elemental Attack: " + elementalAttack);
+                       c.takeDamage(elementalAttack);
+                   }
                    else if (c.getAttribute() == "fire")
                    {
                        elementalAttack = (int)(0.25 * attackDamage);
@@ -145,6 +163,12 @@ public class EvolvableCuteCreature extends CuteCreature
                     elementalAttack = attackDamage;
                     System.out.println("Elemental Attack: " + elementalAttack);
                     c.takeDamage(elementalAttack);
+                   }
+                    else if (c.getAttribute() == "earth")
+                   {
+                       elementalAttack = 0;
+                       System.out.println("Elemental Attack: " + elementalAttack);
+                       c.takeDamage(elementalAttack);
                    }
                    else if (c.getAttribute() == "air")
                    {
